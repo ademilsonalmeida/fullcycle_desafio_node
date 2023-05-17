@@ -1,2 +1,11 @@
-# fullcycle_desafio_node
-Full Cycle - Docker Desafio Node
+# Full Cycle - Docker Desafio Node
+
+# Run
+´´´
+docker compose up -d
+´´´
+
+# Access
+´´´
+htto://localhost:8080
+´´´
