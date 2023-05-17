@@ -7,5 +7,5 @@ docker compose up -d
 
 # Access
 ```
-htto://localhost:8080
+http://localhost:8080
 ```
