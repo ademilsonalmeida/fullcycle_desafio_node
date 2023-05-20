@@ -14,20 +14,20 @@ services:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
     networks:
-      - node-network
-    #ports:
-      #- '3306:3306'
+      - node-network    
 
-  app:
+  node:
     build:
-      context: node
-    container_name: app    
+      context: ./node
+    container_name: node
+    entrypoint: dockerize -wait tcp://db:3306 docker-entrypoint.sh
+    command: node index.js
+    restart: always
     volumes:
       - ./node:/usr/src/app
     networks:
       - node-network  
-    #ports:
-      #- "3000:3000"  
+
     tty: true
     depends_on:
       - db
@@ -35,14 +35,14 @@ services:
   nginx:
     build:
       context: ./nginx
-    container_name: nginx    
+    container_name: nginx   
+    restart: always 
     networks:
       - node-network
     ports:
-      - '8080:8080'
+      - '8080:80'
     depends_on:
-      - db
-      - app
+      - node
 
 networks:
   node-network:
